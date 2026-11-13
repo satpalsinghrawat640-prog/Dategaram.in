@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Dategram</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+html{--bg:#faf7ff;--c:#fff;--t:#1b1230;--m:#7a6f90;--l:#e8e0f5;--g:linear-gradient(135deg,#7c3aed,#ec4899)}
+html[data-th=dark]{--bg:#120c1f;--c:#1d1530;--t:#f3eefc;--m:#a99bc4;--l:#2f2447}
+body{font:15px Figtree,system-ui,sans-serif;background:var(--bg);color:var(--t);padding-top:env(safe-area-inset-top);overflow-x:hidden}
+#app{max-width:520px;margin:auto;min-height:100vh;padding-bottom:calc(76px + env(safe-area-inset-bottom))}
+h2,h3,.lg b{font-family:Sora,sans-serif}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+a{color:#a43ae0;cursor:pointer}
+.top{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;position:sticky;top:0;background:var(--bg);z-index:5}
+.lg{display:flex;gap:8px;align-items:center}.lg svg{width:30px}.lg b{font-size:20px;background:var(--g);-webkit-background-clip:text;background-clip:text;color:transparent}
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;display:flex;justify-content:space-around;align-items:center;background:var(--c);padding:8px 0 calc(8px + env(safe-area-inset-bottom));border-top:1px solid var(--l);z-index:6}
+nav button{padding:6px 12px;color:var(--m)}nav .on{color:#a43ae0}
+.ic{width:26px;height:26px;display:block}
+.av{display:inline-flex;width:36px;height:36px;border-radius:50%;background:var(--g);color:#fff;align-items:center;justify-content:center;overflow:hidden;flex:none;font-weight:700}
+.av img{width:100%;height:100%;object-fit:cover}.av.big{width:84px;height:84px;font-size:30px}nav .av{width:28px;height:28px}
+.card{background:var(--c);border-radius:22px;margin:12px;box-shadow:0 6px 24px #7c3aed1f;overflow:hidden;padding-bottom:6px}
+.card header{display:flex;align-items:center;gap:8px;padding:10px 12px}.card>p{padding:0 14px 8px}
+.pimg{width:100%;display:block;max-height:560px;object-fit:cover}
+.act{display:flex;gap:12px;padding:8px 12px;align-items:center}.act .on{color:#ec4899}.sp{flex:1}
+.b{display:inline-flex;width:15px;height:15px;border-radius:50%;background:#1d9bf0;color:#fff;font:700 10px/15px sans-serif;justify-content:center;margin-left:4px;font-style:normal}.b.g{background:#22c55e}
+.btn{background:var(--g);color:#fff;border-radius:14px;padding:12px 18px;font-weight:700;display:block;margin:10px 0;width:100%}.btn:disabled{opacity:.4}
+input,textarea{font:inherit;color:inherit;background:var(--c);border:1px solid var(--l);border-radius:14px;padding:12px;width:100%;margin:6px 0}
+input[type=checkbox]{width:auto;margin-right:8px}
+.wrap{padding:20px}.wrap.c{text-align:center;padding-top:22vh}.wrap.c svg{width:96px;margin-bottom:12px}
+.pick{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;margin:10px 0;padding:22px 12px;border:2px dashed #a43ae0;border-radius:18px;color:#a43ae0;font-weight:700;cursor:pointer;overflow:hidden}.pick input{position:absolute;inset:0;width:100%;height:100%;opacity:0;margin:0;padding:0;border:0;cursor:pointer}.pick .pimg{border-radius:12px}
+.er{color:#e11d48;font-size:13px;display:block}.mt{color:var(--m);text-align:center;padding:24px}small{color:var(--m)}
+.sheet{position:fixed;inset:0;background:#0008;z-index:20;display:flex;align-items:flex-end;justify-content:center}
+.box{background:var(--bg);width:100%;max-width:520px;max-height:88vh;overflow:auto;border-radius:24px 24px 0 0;padding:18px 18px calc(18px + env(safe-area-inset-bottom));position:relative}
+.x{position:absolute;right:16px;top:12px;font-size:18px}.box h3{margin-bottom:10px}.box .l p,.mi{padding:9px 0;border-bottom:1px solid var(--l);display:flex;gap:10px;align-items:center}.mi{width:100%;text-align:left}
+.row{display:flex;gap:8px;align-items:center}.row .btn{width:auto;margin:0}
+#ts{position:fixed;left:50%;bottom:92px;transform:translateX(-50%);background:#1b1230;color:#fff;padding:10px 16px;border-radius:14px;z-index:30;max-width:90%}
+.ub{background:var(--g);color:#fff;text-align:center;padding:8px;cursor:pointer}
+.hint{margin:12px;padding:12px 14px;border-radius:18px;background:var(--c);border:1px dashed #a43ae0;font-size:13px}
+.ph{display:flex;gap:14px;align-items:center;padding:14px}.ph>div{flex:1}#pp,.pf{padding:0 14px}.pf p{margin:6px 0}
+.dk{margin:12px;background:var(--c);border-radius:24px;overflow:hidden;box-shadow:0 8px 28px #7c3aed26}
+.dk .ph0{width:100%;aspect-ratio:1;object-fit:cover;display:flex;align-items:center;justify-content:center;background:var(--g);color:#fff;font-size:80px}
+.dk .in{padding:14px}.dk .row{padding:0 14px 14px;justify-content:space-between}
+
+.mi{border-radius:16px;padding:12px 14px;margin-bottom:8px;background:var(--c);border:0;box-shadow:0 3px 12px #7c3aed14;font-weight:600}
+.mi .mx{width:38px;height:38px;border-radius:12px;background:var(--g);color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;flex:none}
+.mi .mt2{flex:1}.mi small{display:block;font-weight:400}.mi .ar{color:var(--m)}
+.mi.red .mx{background:#e11d48}
+.stories{display:flex;gap:12px;overflow-x:auto;padding:10px 14px;scrollbar-width:none}.stories::-webkit-scrollbar{display:none}
+.stories button{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:12px;width:68px;flex:none}
+.ring{padding:3px;border-radius:50%;background:var(--l)}.ring.new{background:var(--g)}.ring .av{width:58px;height:58px;border:3px solid var(--bg)}
+.ring.add{position:relative}.pl{position:absolute;right:0;bottom:0;background:#7c3aed;color:#fff;border-radius:50%;width:20px;height:20px;font-size:14px;line-height:20px;text-align:center}
+#sv{position:fixed;inset:0;background:#000;z-index:40;display:flex;flex-direction:column;justify-content:center}
+#sv .bars{position:absolute;top:calc(10px + env(safe-area-inset-top));left:10px;right:10px;display:flex;gap:4px}
+#sv .bars i{flex:1;height:3px;background:#fff5;border-radius:2px;overflow:hidden}#sv .bars i b{display:block;height:100%;width:0;background:#fff}
+#sv img{width:100%;max-height:100vh;object-fit:contain}
+#sv .hd{position:absolute;top:calc(24px + env(safe-area-inset-top));left:12px;right:12px;color:#fff;display:flex;gap:8px;align-items:center}
+#sv .cp{position:absolute;bottom:calc(30px + env(safe-area-inset-bottom));left:16px;right:16px;color:#fff;text-align:center;text-shadow:0 1px 4px #000}
+#sv .zl,#sv .zr{position:absolute;top:60px;bottom:90px;width:40%}#sv .zl{left:0}#sv .zr{right:0}
+.pcards{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px}
+.pc{background:var(--c);border-radius:20px;overflow:hidden;box-shadow:0 6px 20px #7c3aed1f;text-align:center;padding-bottom:10px}
+.pc .im{width:100%;aspect-ratio:1;object-fit:cover;display:flex;align-items:center;justify-content:center;background:var(--g);color:#fff;font-size:44px}
+.pc b{display:block;margin-top:8px}.pc small{display:block;min-height:18px}
+.pc .row{justify-content:center;padding:6px 6px 0;gap:6px}.pc .sm{background:var(--g);color:#fff;border-radius:12px;padding:8px 10px;font-size:13px;font-weight:700}
+.pc .sm.o{background:var(--l);color:var(--t)}
+.sbar{padding:0 12px}.sbar input{padding:8px 14px;margin:8px 0;border-radius:20px;max-width:240px}
+.tk{display:flex;gap:10px;margin:8px 0}.tk button{flex:1;border-radius:14px;padding:12px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px}
+.tk .bl{background:#1d9bf0;color:#fff}.tk .gr{background:#22c55e;color:#fff}
+.sup{display:flex;align-items:center;gap:12px;padding:14px;border-radius:16px;background:var(--c);margin:8px 0;box-shadow:0 3px 12px #7c3aed14;font-weight:700;color:var(--t);text-decoration:none}
+.sup svg{width:30px;height:30px;flex:none}
+.pl2{background:var(--c);border-radius:18px;padding:14px;margin:10px 0;box-shadow:0 3px 12px #7c3aed14}
+</style></head>
+<body><div id="app"></div>
+<script type="module">
+import{initializeApp}from'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
+import{getAuth,GoogleAuthProvider,signInWithPopup,signInWithRedirect,onAuthStateChanged,signOut}from'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
+import{getFirestore,doc,getDoc,getDocs,setDoc,updateDoc,deleteDoc,collection,query,where,limit,onSnapshot,runTransaction,getCountFromServer}from'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
+const VERSION=1,ADMIN='satpalsinghrawat640@gmail.com';
+const fb=initializeApp({apiKey:'AIzaSyAYW4H6n4BZnRZM4T3EJ_YBSbeF01NONBM',authDomain:'dategaram-6cc9f.firebaseapp.com',projectId:'dategaram-6cc9f',storageBucket:'dategaram-6cc9f.firebasestorage.app',messagingSenderId:'669219600302',appId:'1:669219600302:web:6a15428ac5360567993a3f'});
+const auth=getAuth(fb),db=getFirestore(fb),$=s=>document.querySelector(s),root=$('#app'),M=()=>$('#m');
+const LOGO='<svg viewBox="0 0 64 64"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c3aed"/><stop offset="1" stop-color="#ec4899"/></linearGradient></defs><rect width="64" height="64" rx="16" fill="url(#g)"/><circle cx="32" cy="32" r="17" fill="none" stroke="#fff" stroke-width="4"/><path d="M32 40l-6-5.5a3.5 3.5 0 015-5l1 1 1-1a3.5 3.5 0 015 5z" fill="#fff"/></svg>';
+const fav=document.createElement('link');fav.rel='icon';fav.href='data:image/svg+xml,'+encodeURIComponent(LOGO);document.head.append(fav);
+document.documentElement.dataset.th=localStorage.th||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+const I={home:'M3 11l9-8 9 8v10h-6v-6H9v6H3z',chat:'M4 5h16v11H9l-5 4z',plus:'M12 5v14M5 12h14',search:'M11 4a7 7 0 100 14 7 7 0 000-14zM21 21l-5-5',heart:'M12 20s-8-5-8-11a4.5 4.5 0 018-3 4.5 4.5 0 018 3c0 6-8 11-8 11z',bell:'M6 16v-5a6 6 0 0112 0v5l2 2H4zM10 21h4',menu:'M4 6h16M4 12h16M4 18h16',trash:'M5 7h14M9 7V4h6v3M7 7l1 13h8l1-13',pin:'M12 3v10M8 13h8M12 13v8'};
+const ic=(n,f)=>`<svg class="ic" viewBox="0 0 24 24" fill="${f?'currentColor':'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="${I[n]}"/></svg>`;
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const img=s=>/^data:image\/[a-z+.-]+;base64,[A-Za-z0-9+/=]+$/.test(s||'')?s:'';
+const UN=/^(?!\.)(?!.*\.\.)(?!.*\.$)[a-z0-9_.]{3,30}$/;
+const age=d=>{const b=new Date(d+'T00:00:00'),n=new Date();if(isNaN(b))return -1;let a=n.getFullYear()-b.getFullYear();if(n.getMonth()<b.getMonth()||(n.getMonth()==b.getMonth()&&n.getDate()<b.getDate()))a--;return a};
+const pid=()=>String(9e12-Date.now()).padStart(13,'0')+'_'+Math.random().toString(36).slice(2,8);
+const toast=t=>{let e=$('#ts');if(!e){e=document.createElement('div');e.id='ts';document.body.append(e)}e.textContent=t;e.hidden=false;clearTimeout(e.t);e.t=setTimeout(()=>e.hidden=true,2800)};
+const soon=()=>toast('Coming in the next update');
+const shrink=(f,max,q=.78)=>new Promise((ok,no)=>{const r=new FileReader();r.onload=()=>{const i=new Image();i.onload=()=>{const k=Math.min(1,max/Math.max(i.width,i.height)),c=document.createElement('canvas');c.width=Math.round(i.width*k);c.height=Math.round(i.height*k);c.getContext('2d').drawImage(i,0,0,c.width,c.height);ok(c.toDataURL('image/jpeg',q))};i.onerror=no;i.src=r.result};r.onerror=no;r.readAsDataURL(f)});
+
+const SUPP={tg:'https://t.me/Sattu7x',ch:'https://t.me/+iG52XrtB7CE1MGI1',gp:'https://t.me/+Zddl9_uCLqZkYjQ1',em:'satpalsinghrawat640@gmail.com',ig:''};
+const TG='<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#229ED9"/><path d="M5.5 11.8l11.4-4.4c.5-.2 1 .1.8.9l-1.9 9.1c-.1.6-.5.8-1 .5l-2.9-2.1-1.4 1.4c-.2.2-.3.3-.6.3l.2-3 5.4-4.9c.2-.2 0-.3-.3-.1l-6.7 4.2-2.9-.9c-.6-.2-.6-.6.1-.9z" fill="#fff"/></svg>';
+const IGL='<svg viewBox="0 0 24 24"><defs><linearGradient id="ig" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#feda75"/><stop offset=".5" stop-color="#d62976"/><stop offset="1" stop-color="#4f5bd5"/></linearGradient></defs><rect width="24" height="24" rx="6" fill="url(#ig)"/><circle cx="12" cy="12" r="4.5" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.3" fill="#fff"/></svg>';
+const EML='<svg viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#ea4335"/><path d="M5 8l7 5 7-5M5 8v8h14V8" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg>';
+const TICK='<i class="b">✓</i>',GTICK='<i class="b g">✓</i>';
+let me,P,L=new Set(),pg=[],gl=[];const U={};
+const user=async id=>U[id]||(U[id]=(await getDoc(doc(db,'users',id))).data()||{uid:id,un:'deleted',name:'Deleted'});
+const badge=u=>(u.green?'<i class="b g">✓</i>':'')+(u.plan>0&&u.planUntil>Date.now()?'<i class="b">✓</i>':'');
+const av=(u,c='')=>`<span class="av ${c}">${img(u.av)?`<img src="${img(u.av)}" alt="">`:esc((u.name||'?')[0].toUpperCase())}</span>`;
+const TERMS='Dategram is for adults only: you must be 18 or older. All posts, comments and messages are user generated; you are responsible for what you share and must not post illegal, abusive or hateful content. We may remove content or ban accounts that break these rules. Your data is stored in Google Firebase and is used only to run the app. You can ask to delete your account at any time.';
+function sheet(h){const s=document.createElement('div');s.className='sheet';s.innerHTML=`<div class="box"><button class="x">✕</button>${h}</div>`;const rm=s.remove.bind(s);s.cl=[];s.remove=()=>{s.cl.forEach(f=>f());rm()};s.onclick=e=>{if(e.target==s||e.target.classList.contains('x'))s.remove()};document.body.append(s);return s}
+const closeAll=()=>document.querySelectorAll('.sheet').forEach(s=>s.remove());
+const signIn=async()=>{const p=new GoogleAuthProvider();try{await signInWithPopup(auth,p)}catch(e){if(e.code!='auth/popup-closed-by-user')try{await signInWithRedirect(auth,p)}catch(x){toast(x.message)}}};
+function login(){root.innerHTML=`<div class="wrap c">${LOGO}<h2>Dategram</h2><p class="mt">Meet, post and chat. Adults 18+ only.</p><button class="btn" id="gb">Continue with Google</button></div>`;$('#gb').onclick=signIn}
+function banned(){root.innerHTML='<div class="wrap c"><h2>Account banned</h2><p class="mt">This account cannot use Dategram.</p><a id="lo">Log out</a></div>';$('#lo').onclick=()=>signOut(auth)}
+function signup(){const u=auth.currentUser;let a='';
+root.innerHTML=`<div class="wrap"><h2>Create your profile</h2><label class="pick"><span class="av big" id="pv">+</span>Add photo (gallery or camera)<input id="f" type="file" accept="image/*"></label><input id="n" placeholder="Name" maxlength="40" value="${esc(u.displayName||'')}"><input id="un" placeholder="username" maxlength="30" autocapitalize="none"><small class="er" id="ue"></small><label><small>Date of birth (cannot be changed later)</small><input id="dob" type="date"></label><small class="er" id="de"></small><input id="ci" placeholder="City or address" maxlength="80"><textarea id="bio" placeholder="Short bio" maxlength="150"></textarea><label><input id="ag" type="checkbox">I agree to the <a id="tl">Terms and Privacy Policy</a></label><button class="btn" id="go" disabled>Create account</button><a id="lo">Log out</a></div>`;
+const q=x=>root.querySelector(x);
+const chk=()=>{const un=q('#un').value,ag=age(q('#dob').value);q('#ue').textContent=un&&!UN.test(un)?'3-30 characters: a-z, 0-9, _ and . (no spaces, no leading/trailing or double dots).':'';q('#de').textContent=q('#dob').value&&ag<18?'You must be 18 or older to use Dategram.':'';q('#go').disabled=!(UN.test(un)&&ag>=18&&q('#n').value.trim()&&q('#ag').checked&&a)};
+q('#un').oninput=e=>{e.target.value=e.target.value.toLowerCase();chk()};['#dob','#n','#ag'].forEach(x=>q(x).oninput=chk);q('#ag').onchange=chk;
+q('#f').onchange=async e=>{try{a=await shrink(e.target.files[0],256);q('#pv').innerHTML=`<img src="${a}">`;chk()}catch{toast('Could not read that image')}};
+q('#tl').onclick=()=>sheet(`<h3>Terms and Privacy</h3><p>${esc(TERMS)}</p>`);q('#lo').onclick=()=>signOut(auth);
+q('#go').onclick=async()=>{const un=q('#un').value.trim(),d={uid:u.uid,un,name:q('#n').value.trim(),dob:q('#dob').value,city:q('#ci').value.trim(),bio:q('#bio').value.trim(),av:a,showAge:true,plan:0,planUntil:0,green:false,banned:false,ct:Date.now()};
+if(age(d.dob)<18)return chk();q('#go').disabled=true;
+try{await runTransaction(db,async t=>{const r=doc(db,'usernames',un);if((await t.get(r)).exists())throw Error('Username is taken');t.set(r,{uid:u.uid});t.set(doc(db,'users',u.uid),d)});P=d;U[u.uid]=d;start()}catch(e){toast(e.message);chk()}}}
+function start(){
+root.innerHTML=`<div id="ub" class="ub" hidden>Update available, tap to update</div><header class="top"><span class="lg">${LOGO}<b>Dategram</b></span><button data-go="bell">${ic('bell')}</button></header><main id="m"></main><nav>${[['home','home'],['chat','chat'],['plus','plus'],['search','search']].map(x=>`<button data-go="${x[0]}">${ic(x[1])}</button>`).join('')}<button data-go="me">${av(P)}</button></nav>`;
+$('#ub').onclick=()=>location.reload();
+gl.push(onSnapshot(doc(db,'settings','app'),s=>{$('#ub').hidden=!((s.data()?.version||0)>VERSION)},()=>{}));
+gl.push(onSnapshot(query(collection(db,'likes'),where('uid','==',me.uid)),s=>{L=new Set(s.docs.map(d=>d.data().postId));paintLikes()},()=>{}));
+go('home')}
+function go(v,a){pg.forEach(f=>f());pg=[];document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.go==v||(v=='prof'&&a==me.uid&&b.dataset.go=='me')));({home,search:disc,prof:profile})[v](a);scrollTo(0,0)}
+function paintLikes(){document.querySelectorAll('.card').forEach(c=>{const b=c.querySelector('[data-a=like]'),on=L.has(c.dataset.id);b.classList.toggle('on',on);b.innerHTML=ic('heart',on)})}
+const card=p=>{const u=U[p.uid]||{},mine=p.uid==me.uid,on=L.has(p.id);return`<article class="card" data-id="${p.id}" data-pu="${p.uid}" data-pin="${p.pinned?1:0}"><header data-u="${p.uid}">${av(u)}<b>${esc(u.un)}</b>${badge(u)}<span class="sp"></span>${mine?`<button data-a="del">${ic('trash')}</button>`:''}</header>${img(p.img)?`<img class="pimg" src="${img(p.img)}" alt="">`:''}<div class="act"><button data-a="like" class="${on?'on':''}">${ic('heart',on)}</button><button data-a="cmt">${ic('chat')}</button>${mine?`<button data-a="pin" title="Pin">${ic('pin')}</button><button data-a="by"><small>Liked by</small></button>`:''}</div>${p.cap?`<p><b>${esc(u.un)}</b> ${esc(p.cap)}</p>`:''}</article>`};
+function home(){const hide=localStorage.hint;M().innerHTML=`${hide?'':'<div class="hint"><b>Add Dategram to your home screen</b><br>Android: Chrome menu (⋮) → Add to Home screen.<br>iPhone: Safari Share → Add to Home Screen.<br><a id="hx">Hide</a></div>'}<div class="stories" id="stb"></div><div id="feed"></div>`;loadStories($('#stb'));
+if(!hide)$('#hx').onclick=()=>{localStorage.hint=1;$('.hint').remove()};const f=$('#feed');
+pg.push(onSnapshot(query(collection(db,'posts'),limit(60)),async s=>{const ps=s.docs.map(d=>({id:d.id,...d.data()}));await Promise.all([...new Set(ps.map(p=>p.uid))].map(user));f.innerHTML=ps.length?ps.map(card).join(''):'<p class="mt">No posts yet. Tap + to share the first one.</p>'},e=>toast(e.message)))}
+async function profile(id){const u=await user(id),mine=id==me.uid;
+try{const[n1,n2,f]=await Promise.all([getCountFromServer(query(collection(db,'follows'),where('to','==',id))),getCountFromServer(query(collection(db,'follows'),where('from','==',id))),mine?null:getDoc(doc(db,'follows',me.uid+'_'+id))]);
+M().innerHTML=`<section class="ph">${av(u,'big')}<div><h2>${esc(u.name)}${badge(u)}</h2><small>@${esc(u.un)}${u.showAge?' · '+age(u.dob):''}${u.city?' · '+esc(u.city):''}</small></div>${mine?`<button data-a="menu">${ic('menu')}</button>`:''}</section><div class="pf"><p>${esc(u.bio)}</p><p><b>${n1.data().count}</b> followers · <b>${n2.data().count}</b> following</p>${mine?'<button class="btn" data-a="edit">✏️ Edit Profile</button>':`<button class="btn" id="fb">${f.exists()?'Following':'Follow'}</button>`}</div><div id="pp"></div>`;
+if(!mine)$('#fb').onclick=async()=>{try{await(f.exists()?deleteDoc(f.ref):setDoc(f.ref,{from:me.uid,to:id,status:'accepted',t:Date.now()}));profile(id)}catch(e){toast(e.message)}};
+pg.push(onSnapshot(query(collection(db,'posts'),where('uid','==',id)),s=>{const ps=s.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(b.pinned?1:0)-(a.pinned?1:0)||(a.id<b.id?-1:1));$('#pp').innerHTML=ps.map(card).join('')||'<p class="mt">No posts yet.</p>'},e=>toast(e.message)))}catch(e){toast(e.message)}}
+async function disc(){M().innerHTML='<div class="sbar"><input id="q" placeholder="Search"></div><div id="dk" class="pcards"></div>';let all=[],ls=[],fl=new Set,st=new Set;
+try{all=(await getDocs(query(collection(db,'users'),limit(100)))).docs.map(d=>d.data()).filter(u=>u.uid!=me.uid&&!u.banned);
+fl=new Set((await getDocs(query(collection(db,'follows'),where('from','==',me.uid)))).docs.map(d=>d.data().to));
+st=new Set((await getDocs(query(collection(db,'stars'),where('uid','==',me.uid)))).docs.map(d=>d.data().target))}catch(e){toast(e.message)}
+const paint=()=>{const d=$('#dk');d.innerHTML=ls.map(u=>`<div class="pc" data-uid="${u.uid}"><div data-u="${u.uid}">${img(u.av)?`<img class="im" src="${img(u.av)}" alt="">`:`<div class="im">${esc((u.name||'?')[0])}</div>`}<b>${esc(u.name)}${badge(u)}</b><small>${u.showAge?age(u.dob)+(u.city?' · ':''):''}${esc(u.city)}</small></div><div class="row"><button class="sm ${fl.has(u.uid)?'o':''}" data-f="${u.uid}">${fl.has(u.uid)?'Following':'Follow'}</button><button class="sm o" data-s="${u.uid}">${st.has(u.uid)?'★':'☆'}</button></div></div>`).join('')||'<p class="mt">No profiles found.</p>'};
+$('#q').oninput=e=>{const k=e.target.value.trim().toLowerCase();ls=all.filter(u=>!k||u.un.includes(k)||(u.name||'').toLowerCase().includes(k));paint()};ls=all;paint();
+$('#dk').onclick=async e=>{const f=e.target.closest('[data-f]'),t=e.target.closest('[data-s]');try{
+if(f){const id=f.dataset.f,r=doc(db,'follows',me.uid+'_'+id);if(fl.has(id)){await deleteDoc(r);fl.delete(id)}else{await setDoc(r,{from:me.uid,to:id,status:'accepted',t:Date.now()});fl.add(id)}paint()}
+else if(t){const id=t.dataset.s,r=doc(db,'stars',me.uid+'_'+id);if(st.has(id)){await deleteDoc(r);st.delete(id)}else{await setDoc(r,{uid:me.uid,target:id,t:Date.now()});st.add(id)}paint()}}catch(x){toast(x.message)}}}
+
+let SB={};
+async function loadStories(box){try{const q=await getDocs(query(collection(db,'stories'),limit(60)));const now=Date.now();SB={};q.docs.forEach(d=>{const x=d.data(),it=(x.items||[]).filter(i=>i.exp>now);if(it.length)SB[d.id]=it});
+const seen=JSON.parse(localStorage.seen||'{}'),ids=Object.keys(SB).filter(i=>i!=me.uid);await Promise.all(ids.map(user));
+const mine=SB[me.uid];
+box.innerHTML=`<button data-st="${me.uid}" data-add="1"><span class="ring add ${mine?'new':''}">${av(P)}<span class="pl" data-newst="1">+</span></span>Your story</button>`+ids.map(i=>{const last=SB[i][SB[i].length-1].t,nw=(seen[i]||0)<last;return`<button data-st="${i}"><span class="ring ${nw?'new':''}">${av(U[i])}</span>${esc((U[i].un||'').slice(0,9))}</button>`}).join('')}catch(e){box.innerHTML=''}}
+function addStory(){let im='';const s=sheet('<h3>New story</h3><label class="pick"><img id="pv" class="pimg" hidden alt=""><span id="pt">📷 Choose a photo</span><input id="f" type="file" accept="image/*"></label><input id="cap" maxlength="100" placeholder="Caption"><button class="btn" id="sh" disabled>Share story</button>'),q=x=>s.querySelector(x);
+q('#f').onchange=async e=>{try{im=await shrink(e.target.files[0],720);q('#pv').src=im;q('#pv').hidden=false;q('#pt').hidden=true;q('#sh').disabled=false}catch{toast('Could not read that image')}};
+q('#sh').onclick=async()=>{q('#sh').disabled=true;try{const r=doc(db,'stories',me.uid),old=(await getDoc(r)).data()?.items||[],now=Date.now(),h=(P.plan>=2&&P.planUntil>now)?48:24;
+const items=[...old.filter(i=>i.exp>now),{img:im,cap:q('#cap').value.trim(),t:now,exp:now+h*3600000}].slice(-5);await setDoc(r,{uid:me.uid,items});s.remove();go('home')}catch(e){toast(e.message);q('#sh').disabled=false}}}
+function viewStory(id){const items=SB[id];if(!items)return;let i=0,tm;const v=document.createElement('div');v.id='sv';document.body.append(v);
+const close=()=>{clearTimeout(tm);v.remove()};
+const show=()=>{if(i>=items.length)return close();if(i<0)i=0;const it=items[i];const u=U[id]||P;
+v.innerHTML=`<div class="bars">${items.map((_,k)=>`<i><b style="width:${k<i?100:0}%"></b></i>`).join('')}</div><div class="hd">${av(u)}<b>${esc(u.un)}</b><span class="sp"></span>${id==me.uid?'<button id="sd">🗑</button>':''}<button id="sx">✕</button></div><img src="${img(it.img)}" alt=""><div class="cp">${esc(it.cap)}</div><div class="zl"></div><div class="zr"></div>`;
+const bar=v.querySelectorAll('.bars b')[i];bar.style.transition='width 5s linear';requestAnimationFrame(()=>requestAnimationFrame(()=>bar.style.width='100%'));
+const sn=JSON.parse(localStorage.seen||'{}');sn[id]=it.t;localStorage.seen=JSON.stringify(sn);
+clearTimeout(tm);tm=setTimeout(()=>{i++;show()},5000);
+v.querySelector('.zr').onclick=()=>{i++;show()};v.querySelector('.zl').onclick=()=>{i--;show()};v.querySelector('#sx').onclick=()=>{close();go('home')};
+const d=v.querySelector('#sd');if(d)d.onclick=async()=>{if(!confirm('Delete this story?'))return;try{const left=items.filter((_,k)=>k!=i);await setDoc(doc(db,'stories',me.uid),{uid:me.uid,items:left});close();go('home')}catch(e){toast(e.message)}}};show()}
+function newPost(){let im='';const s=sheet('<h3>New post</h3><label class="pick"><img id="pv" class="pimg" hidden alt=""><span id="pt">📷 Choose a photo</span><input id="f" type="file" accept="image/*"></label><textarea id="cap" maxlength="500" placeholder="Write a caption"></textarea><button class="btn" id="sh" disabled>Share</button>'),q=x=>s.querySelector(x);
+q('#f').onchange=async e=>{try{im=await shrink(e.target.files[0],720);q('#pv').src=im;q('#pv').hidden=false;q('#pt').hidden=true;q('#sh').disabled=false}catch{toast('Could not read that image')}};
+q('#sh').onclick=async()=>{q('#sh').disabled=true;try{await setDoc(doc(db,'posts',pid()),{uid:me.uid,img:im,cap:q('#cap').value.trim(),t:Date.now(),pinned:false});s.remove();go('home')}catch(e){toast(e.message);q('#sh').disabled=false}}}
+async function like(id,pu){const r=doc(db,'likes',id+'_'+me.uid);try{L.has(id)?await deleteDoc(r):await setDoc(r,{postId:id,postUid:pu,uid:me.uid,t:Date.now()})}catch(e){toast(e.message)}}
+function comments(id,pu){const s=sheet('<h3>Comments</h3><div class="l"></div><div class="row"><input id="ci" maxlength="300" placeholder="Add a comment"><button class="btn" id="cs">Post</button></div>'),l=s.querySelector('.l');
+s.cl.push(onSnapshot(query(collection(db,'comments'),where('postId','==',id)),async q=>{const cs=q.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>a.t-b.t);await Promise.all(cs.map(c=>user(c.uid)));l.innerHTML=cs.map(c=>`<p><span><b>${esc(U[c.uid].un)}</b> ${esc(c.txt)}</span><span class="sp"></span>${c.uid==me.uid||pu==me.uid?`<a data-cd="${c.id}">delete</a>`:''}</p>`).join('')||'<p class="mt">No comments yet.</p>'},e=>toast(e.message)));
+l.onclick=async e=>{const c=e.target.dataset.cd;if(c)try{await deleteDoc(doc(db,'comments',c))}catch(x){toast(x.message)}};
+s.querySelector('#cs').onclick=async()=>{const i=s.querySelector('#ci'),t=i.value.trim();if(!t)return;try{await setDoc(doc(collection(db,'comments')),{postId:id,postUid:pu,uid:me.uid,txt:t,t:Date.now()});i.value=''}catch(e){toast(e.message)}}}
+async function likedBy(id){const s=sheet('<h3>Liked by</h3><div class="l"><p class="mt">Loading…</p></div>');try{const q=await getDocs(query(collection(db,'likes'),where('postId','==',id),where('postUid','==',me.uid)));const us=await Promise.all(q.docs.map(d=>user(d.data().uid)));s.querySelector('.l').innerHTML=us.map(u=>`<p data-u="${u.uid}">${av(u)}<b>${esc(u.un)}</b>${badge(u)}</p>`).join('')||'<p class="mt">No likes yet.</p>'}catch(e){toast(e.message)}}
+function edit(){let a=P.av;const s=sheet(`<h3>Edit Profile</h3><label class="pick"><span class="av big" id="pv">${img(a)?`<img src="${img(a)}">`:'+'}</span>Change photo<input id="f" type="file" accept="image/*"></label><input id="n" value="${esc(P.name)}" maxlength="40"><input id="un" value="${esc(P.un)}" maxlength="30" autocapitalize="none"><input id="ci" value="${esc(P.city)}" maxlength="80" placeholder="City"><textarea id="bio" maxlength="150" placeholder="Bio">${esc(P.bio)}</textarea><label><input type="checkbox" id="sa" ${P.showAge?'checked':''}>Show age</label><small>Date of birth cannot be changed.</small><div class="tk"><button class="bl" id="eb">${TICK} Blue Tick</button><button class="gr" id="eg">${GTICK} Free Green Tick</button></div><button class="btn" id="sv">Save</button>`),q=x=>s.querySelector(x);
+q('#f').onchange=async e=>{try{a=await shrink(e.target.files[0],256);q('#pv').innerHTML=`<img src="${a}">`}catch{toast('Could not read that image')}};
+q('#eb').onclick=plans;q('#eg').onclick=greenTick;
+q('#sv').onclick=async()=>{const un=q('#un').value.trim().toLowerCase();if(!UN.test(un))return toast('Invalid username');const d={name:q('#n').value.trim()||P.name,un,city:q('#ci').value.trim(),bio:q('#bio').value.trim(),showAge:q('#sa').checked,av:a};
+try{await runTransaction(db,async t=>{if(un!=P.un){const r=doc(db,'usernames',un);if((await t.get(r)).exists())throw Error('Username is taken');t.set(r,{uid:me.uid});t.delete(doc(db,'usernames',P.un))}t.update(doc(db,'users',me.uid),d)});Object.assign(P,d);$('nav [data-go=me]').innerHTML=av(P);s.remove();go('prof',me.uid)}catch(e){toast(e.message)}}}
+function plans(){sheet(`<h3>Plans and Blue Tick</h3><div class="pl2"><b>${TICK} Blue Tick - Rs 19 / 1 year</b><p><small>Blue Tick badge next to your name everywhere.</small></p><button class="btn" data-pay="1">Choose plan</button></div><div class="pl2"><b>${TICK} Pro - Rs 50 / 1 year</b><p><small>Blue Tick, custom profile colour, 48-hour stories and profile song.</small></p><button class="btn" data-pay="2">Choose plan</button></div><small>Approval is manual and may take some time.</small>`).onclick=e=>{if(e.target.dataset.pay)toast('Payments open in the next update')}}
+function greenTick(){sheet(`<h3>${GTICK} Free Green Tick</h3><p>Verify your profile with a live selfie. Keep your face clear and well lit. We never ask for any ID card.</p><button class="btn" id="gt">Start verification</button>`).querySelector('#gt').onclick=()=>toast('Verification opens in the next update')}
+function support(){const S=SUPP;sheet(`<h3>Support</h3><p><small>We are here to help. Tap a button to reach us.</small></p><a class="sup" href="${S.tg}" target="_blank" rel="noopener">${TG}Telegram</a><a class="sup" href="${S.ch}" target="_blank" rel="noopener">${TG}Telegram Channel</a><a class="sup" href="${S.gp}" target="_blank" rel="noopener">${TG}Telegram Group</a>${S.ig?`<a class="sup" href="${esc(S.ig)}" target="_blank" rel="noopener">${IGL}Instagram</a>`:''}<a class="sup" href="mailto:${S.em}">${EML}Email: ${S.em}</a><h3 style="margin-top:16px">Contact support</h3><textarea id="sm" maxlength="500" placeholder="Write your message"></textarea><button class="btn" id="ss">Send message</button>`).querySelector('#ss').onclick=async function(){const sh=this.closest('.box'),t=sh.querySelector('#sm').value.trim();if(!t)return;try{await setDoc(doc(db,'support',pid()),{uid:me.uid,un:P.un,txt:t,t:Date.now()});sh.querySelector('#sm').value='';toast('Message sent. We will reply soon.')}catch(e){toast(e.message)}}}
+function menu(){const it=[['⚙️','Settings','Dark mode and account','set'],['🔖','Saved','Posts you saved','x'],['⭐','Close Friends','Your private star list','x'],['💎','Plans and Blue Tick','Get your badge','plans'],['✅','Free Green Tick','Verify with a selfie','green'],['🚫','Blocked accounts','People you blocked','x'],['💬','Support','Chat, email and help','sup'],['📄','Terms and Privacy','Rules of Dategram','tp'],...(me.email==ADMIN&&me.emailVerified?[['🛡️','Admin Panel','Owner tools','x']]:[]),['🚪','Log out','Sign out of this account','out','red']];
+const s=sheet('<h3>Menu</h3>'+it.map(x=>`<button class="mi ${x[4]||''}" data-m="${x[3]}"><span class="mx">${x[0]}</span><span class="mt2">${x[1]}<small>${x[2]}</small></span><span class="ar">›</span></button>`).join(''));
+s.onclick=e=>{if(e.target==s||e.target.classList.contains('x'))return s.remove();const bt=e.target.closest('.mi');if(!bt)return;const m=bt.dataset.m;
+if(m=='out'){s.remove();signOut(auth)}else if(m=='tp')sheet(`<h3>Terms and Privacy</h3><p>${esc(TERMS)}</p>`);
+else if(m=='plans')plans();else if(m=='green')greenTick();else if(m=='sup')support();
+else if(m=='set')sheet(`<h3>Settings</h3><label><input type="checkbox" id="dm" ${document.documentElement.dataset.th=='dark'?'checked':''}>Dark mode</label><p><small>Account deletion arrives in a later update.</small></p>`).querySelector('#dm').onchange=e=>{localStorage.th=e.target.checked?'dark':'light';document.documentElement.dataset.th=localStorage.th};
+else soon()}}
+document.addEventListener('click',async e=>{if(e.target.dataset.newst)return addStory();const stt=e.target.closest('[data-st]');if(stt){const id=stt.dataset.st;if(stt.dataset.add&&!SB[id])return addStory();if(stt.dataset.add){return viewStory(id)}return viewStory(id)}const t=e.target.closest('[data-go],[data-a],[data-u]');if(!t||t.closest('.sheet')&&!t.dataset.u)return;const d=t.dataset,c=t.closest('.card'),a=d.a;
+try{if(d.go){const g=d.go;if(g=='home'||g=='search')go(g);else if(g=='me')go('prof',me.uid);else if(g=='plus')newPost();else soon()}
+else if(d.u){closeAll();go('prof',d.u)}
+else if(a=='like')like(c.dataset.id,c.dataset.pu);else if(a=='cmt')comments(c.dataset.id,c.dataset.pu);else if(a=='by')likedBy(c.dataset.id);
+else if(a=='del'){if(confirm('Delete this post?'))await deleteDoc(doc(db,'posts',c.dataset.id))}
+else if(a=='pin')await updateDoc(doc(db,'posts',c.dataset.id),{pinned:c.dataset.pin!='1'});
+else if(a=='menu')menu();else if(a=='edit')edit()}catch(x){toast(x.message)}});
+onAuthStateChanged(auth,async u=>{pg.forEach(f=>f());gl.forEach(f=>f());pg=[];gl=[];
+if(!u){me=null;return login()}me=u;
+try{const s=await getDoc(doc(db,'users',u.uid));if(!s.exists())return signup();P=s.data();U[u.uid]=P;if(P.banned)return banned();start()}catch(e){toast(e.message)}});
+</script></body></html>
+
